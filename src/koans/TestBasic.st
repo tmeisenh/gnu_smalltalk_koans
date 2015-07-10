@@ -2,25 +2,27 @@ Koan subclass: TestBasic [
   <comment: 'A collection of introductory tests.'>
 
   testDeclarationAndAssignment [
-    | declaration anotherDeclaration |
+    | declaration anotherDeclaration foo bar |
     "You must declare variables before using them."
     "Variables are separated by a single space."
 
     declaration _ 1.  "Squeak Smalltalk way to assign value"
     anotherDeclaration := 'string'.  "typical way to assign value
       (this will be used throughout the koans)"
+    foo := declaration.
+    bar := anotherDeclaration.
 
-    self expect: fillMeIn toEqual: declaration.
-    self expect: fillMeIn toEqual: anotherDeclaration.
+    self expect: foo toEqual: declaration.
+    self expect: bar toEqual: anotherDeclaration.
   ]
 
   testEqualSignIsNotAnAssignmentOperator [
     | variableA variableB value |
 
     variableA := variableB := 1234.  "multiple assignments work"
-    value := variableA = variableB.  "equal is not used for assignment"
+    value := variableA == variableB.  "equal is not used for assignment"
 
-    self expect: fillMeIn toEqual: (variableA = variableB).
+    self expect: value toEqual: (variableA == variableB).
 
     "#== is a message that checks if identity is equal.  More about messages in the TestMessage koan."
   ]
